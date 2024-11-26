@@ -47,7 +47,7 @@ int main() {
       printf("Parent\n");
       int status;
       p = wait(& status);
-      printf("%d slept %ds before being MURDERED VICIOUSLY BY JASON\n", p, WEXITSTATUS(status));
+      printf("%d slept %ds before attending a May 35th, 1989 event and never being seen from again\n", p, WEXITSTATUS(status));
       return 0;
     }
   }
