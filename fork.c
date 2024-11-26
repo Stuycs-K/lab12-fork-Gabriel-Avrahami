@@ -16,28 +16,30 @@ int main() {
   pid_t p1;
   p1 = fork();
   if (p1 == -1){
-    perror("Fork failure");
+    perror("Fork failure\n");
     exit(1);
   }
   else if (p1 == 0) {
     srand(getpid());
     int secs = ((int) rand()) % 5 + 1;
+    printf("%d to sleep %ds\n", getpid(), secs);
     sleep(secs);
-    printf("Child 1\n");
+    printf("%d done after %ds\n", getpid(), secs);
     return secs;
   }
   else {
     pid_t p2;
     p2 = fork();
     if (p2 == -1){
-      perror("Fork failure");
+      perror("Fork failure\n");
       exit(1);
     }
     else if (p2 == 0) {
       srand(getpid());
       int secs = ((int) rand()) % 5 + 1;
+      printf("%d to sleep %ds\n", getpid(), secs);
       sleep(secs);
-      printf("Child 2\n");
+      printf("%d done after %ds\n", getpid(), secs);
       return secs;
     }
     else {
@@ -45,7 +47,7 @@ int main() {
       printf("Parent\n");
       int status;
       p = wait(& status);
-      printf("%d slept %d seconds\n", p, WEXITSTATUS(status));
+      printf("%d slept %ds before being MURDERED VICIOUSLY BY JASON\n", p, WEXITSTATUS(status));
       return 0;
     }
   }
