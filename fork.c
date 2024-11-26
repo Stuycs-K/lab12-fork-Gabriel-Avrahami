@@ -20,9 +20,11 @@ int main() {
     exit(1);
   }
   else if (p1 == 0) {
-    sleep(3);
+    srand(getpid());
+    int secs = ((int) rand()) % 5 + 1;
+    sleep(secs);
     printf("Child 1\n");
-    return 3;
+    return secs;
   }
   else {
     pid_t p2;
@@ -32,9 +34,11 @@ int main() {
       exit(1);
     }
     else if (p2 == 0) {
-      sleep(2);
+      srand(getpid());
+      int secs = ((int) rand()) % 5 + 1;
+      sleep(secs);
       printf("Child 2\n");
-      return 2;
+      return secs;
     }
     else {
       pid_t p;
