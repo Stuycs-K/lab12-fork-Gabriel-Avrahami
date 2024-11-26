@@ -19,25 +19,31 @@ int main() {
     perror("Fork failure");
     exit(1);
   }
-  else if (p1 == 0){
-      printf("Child 1\n");
+  else if (p1 == 0) {
+    sleep(3);
+    printf("Child 1\n");
+    return 3;
   }
   else {
-      pid_t p2;
-      p2 = fork();
-      if (p2 == -1){
-        perror("Fork failure");
-        exit(1);
-      }
-      else if (p2 == 0){
-          printf("Child 2\n");
-      }
-      else {
-          printf("Parent\n");
-          int status;
-          wait(& status);
-          printf("%d seconds slept\n", WEXITSTATUS(status));
-      }
+    pid_t p2;
+    p2 = fork();
+    if (p2 == -1){
+      perror("Fork failure");
+      exit(1);
+    }
+    else if (p2 == 0) {
+      sleep(2);
+      printf("Child 2\n");
+      return 2;
+    }
+    else {
+      pid_t p;
+      printf("Parent\n");
+      int status;
+      p = wait(& status);
+      printf("%d slept %d seconds\n", p, WEXITSTATUS(status));
+      return 0;
+    }
   }
   return 0;
 }
